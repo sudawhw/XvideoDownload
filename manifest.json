@@ -45,5 +45,5 @@
     "resources": ["images/*"],
     "matches": ["https://twitter.com/*", "https://x.com/*"]
   }],
-  "privacy_policy": "https://github.com/sudawhw/XvideoDownload/privacy-policy.md"
+  "privacy_policy": "https://github.com/sudawhw/XvideoDownload/blob/main/privacy-policy.md"
 } 

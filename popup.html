@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X视频下载助手设置</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- 标题和版本信息 -->
+    <div class="header">
+      <div class="title">
+        <img src="images/icon48.png" alt="X视频下载助手图标" class="logo">
+        <h1>X视频下载助手</h1>
+      </div>
+      <span class="version">v1.0</span>
+    </div>
+    
+    <!-- 主要设置区域 -->
+    <div class="settings-area">
+      <div class="setting-item">
+        <label class="setting-label" for="enableDownloadBtn">
+          <span>启用下载按钮</span>
+          <span class="setting-desc">在推文中显示媒体下载按钮</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="enableDownloadBtn" checked title="启用下载按钮">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-item">
+        <label class="setting-label" for="enableHighQuality">
+          <span>自动高质量</span>
+          <span class="setting-desc">尝试获取最高清晰度的媒体</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="enableHighQuality" checked title="启用高质量媒体下载">
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="setting-item">
+        <label class="setting-label" for="enableBatchDownload">
+          <span>媒体批量下载</span>
+          <span class="setting-desc">允许多选并批量下载媒体</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="enableBatchDownload" checked title="启用批量下载功能">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    
+    <!-- 分隔线 -->
+    <div class="divider"></div>
+    
+    <!-- 底部区域 -->
+    <div class="footer">
+      <a href="https://x.com/Stefanwan3" target="_blank" rel="noopener noreferrer" class="author-link">
+        <div class="author">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+          </svg>
+          <span>@Stefanwan3</span>
+        </div>
+      </a>
+      
+      <div class="actions">
+        <button id="resetBtn" class="btn secondary" type="button">重置设置</button>
+        <button id="saveBtn" class="btn primary" type="button">保存</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 消息提示区 -->
+  <div id="toast" class="toast hidden" role="alert" aria-live="polite">设置已保存</div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 

@@ -1,0 +1,14 @@
+{
+  "name": "x-video-download",
+  "version": "1.0.0",
+  "description": "Chrome扩展，用于在X（Twitter）网站上添加媒体下载功能",
+  "main": "content.js",
+  "scripts": {
+    "generate-icons": "node generate_icons.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "sharp": "^0.32.1"
+  }
+} 

@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "X视频下载助手",
+  "version": "1.0",
+  "description": "轻松下载X(Twitter)上的视频和图片",
+  "permissions": [
+    "downloads",
+    "tabs",
+    "storage",
+    "scripting",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "https://twitter.com/*",
+    "https://x.com/*",
+    "https://*.twimg.com/*",
+    "https://*.twitter.com/*",
+    "https://api.fxtwitter.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "X视频下载助手",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://twitter.com/*", "https://x.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["images/*"],
+    "matches": ["https://twitter.com/*", "https://x.com/*"]
+  }]
+} 

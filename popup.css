@@ -1,0 +1,271 @@
+/* X视频下载助手设置页面样式 */
+
+:root {
+  --primary-color: #1d9bf0;
+  --secondary-color: #0f84b4;
+  --text-color: #0f1419;
+  --text-secondary: #536471;
+  --background-color: #ffffff;
+  --border-color: #eff3f4;
+  --toggle-off: #cfd9de;
+  --toggle-on: #1d9bf0;
+  --error-color: #f4212e;
+  --success-color: #00ba7c;
+}
+
+/* 基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  width: 300px;
+  overflow-x: hidden;
+}
+
+.popup-container {
+  padding: 16px;
+}
+
+/* 头部样式 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.title h1 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.version {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* 设置区域样式 */
+.settings-area {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* 开关按钮样式 */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 22px;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--toggle-off);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--toggle-on);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--toggle-on);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* 分隔线样式 */
+.divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 16px 0;
+}
+
+/* 底部区域样式 */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--primary-color);
+}
+
+.author-link {
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s;
+}
+
+.author-link:hover {
+  opacity: 0.8;
+}
+
+/* 按钮样式 */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.btn.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn.primary:hover {
+  background-color: var(--secondary-color);
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.btn.secondary:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* 消息提示区样式 */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--success-color);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  opacity: 1;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 1000;
+}
+
+.toast.error {
+  background-color: var(--error-color);
+}
+
+.toast.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+  pointer-events: none;
+}
+
+/* 添加状态指示器样式 */
+.status-indicator {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.status-indicator.loading {
+  background-color: #f0f7ff;
+  color: #0366d6;
+  border: 1px solid #cce4ff;
+}
+
+.status-indicator.success {
+  background-color: #e6ffed;
+  color: #28a745;
+  border: 1px solid #c3e6cb;
+}
+
+.status-indicator.warning {
+  background-color: #fff9e6;
+  color: #f59f00;
+  border: 1px solid #ffe8bc;
+}
+
+.status-indicator.error {
+  background-color: #ffeef0;
+  color: #d73a49;
+  border: 1px solid #f8d7da;
+}
+
+/* 确保在有状态指示器时，其他元素正确显示 */
+.container {
+  margin-top: 5px;
+} 

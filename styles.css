@@ -1,0 +1,654 @@
+/* X视频下载助手样式 */
+
+/* 移除之前的闪光动画效果 */
+/* 定义简单的悬停效果 */
+@keyframes simple-highlight {
+  0% {
+    color: rgb(29, 155, 240);
+  }
+  100% {
+    color: rgb(29, 155, 240);
+  }
+}
+
+/* 下载按钮容器样式 */
+.x-download-button-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+/* 下载按钮样式 */
+.x-download-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: rgb(239, 243, 244);
+  color: rgb(15, 20, 25);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.x-download-button:hover {
+  background-color: rgb(215, 219, 220);
+}
+
+/* 工具提示样式 */
+.x-tooltip {
+  position: fixed;
+  display: none;
+  background-color: rgba(15, 20, 25, 0.8);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-100%);
+  margin-top: -5px;
+}
+
+/* 下载指示器 - 统一风格 */
+.x-downloading-indicator,
+.x-media-selection-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+/* 下载指示器内容 - 统一风格 */
+.x-indicator-content,
+.x-dialog-content {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 85%;
+  min-width: 320px;
+  max-height: 85vh;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 媒体选择对话框内容 - 统一风格 */
+.x-dialog-content {
+  width: 500px;
+  max-width: 90%;
+}
+
+.x-dialog-content h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* 进度动画 */
+.x-loading {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(29, 161, 242, 0.2);
+  border-top-color: #1DA1F2;
+  border-radius: 50%;
+  animation: x-spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes x-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 进度条 */
+.x-progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #333333;
+  border-radius: 2px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.x-progress-fill {
+  height: 100%;
+  background-color: #1DA1F2;
+  transition: width 0.3s ease;
+}
+
+/* 不确定进度条动画 */
+.x-indeterminate-progress {
+  width: 100%;
+  height: 4px;
+  background-color: #333333;
+  border-radius: 2px;
+  margin-top: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.x-indeterminate-progress .x-progress-track {
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  background-color: #1DA1F2;
+  border-radius: 2px;
+  animation: x-indeterminate 1.5s infinite ease-in-out;
+}
+
+@keyframes x-indeterminate {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+/* 媒体选择列表样式 - 统一风格 */
+.x-media-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+/* 媒体项目样式 - 优化风格 */
+.x-media-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1/1;
+  background-color: #333333;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+/* 媒体加载中样式 */
+.x-media-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.x-media-loading .x-loading {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.x-media-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.x-media-item.selected {
+  border-color: #1DA1F2;
+}
+
+.x-media-item img,
+.x-media-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 复选框样式 - 统一风格 */
+.x-checkbox {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.x-media-item.selected .x-checkbox:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #1DA1F2;
+}
+
+/* 媒体信息样式 - 统一风格 */
+.x-media-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: white;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 对话框操作样式 - 统一风格 */
+.x-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.x-dialog-actions span {
+  font-size: 14px;
+  color: #b0b0b0;
+}
+
+.x-dialog-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+/* 按钮样式 - 统一风格 */
+button.x-select-all,
+button.x-dialog-close,
+button.x-download-selected {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button.x-select-all {
+  background-color: #e8f5fe;
+  color: #1DA1F2;
+}
+
+button.x-select-all:hover {
+  background-color: #d8eefe;
+}
+
+button.x-select-all.selected {
+  background-color: #1DA1F2;
+  color: white;
+}
+
+button.x-dialog-close {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+button.x-dialog-close:hover {
+  background-color: #444444;
+}
+
+button.x-download-selected {
+  background-color: #1DA1F2;
+  color: white;
+}
+
+button.x-download-selected:hover {
+  background-color: #1a8cd8;
+}
+
+button.x-download-selected:disabled {
+  background-color: #95cff5;
+  cursor: not-allowed;
+}
+
+/* 步骤指示器样式 */
+.x-step-heading {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.x-steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.x-step-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.x-step-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #cfd9de;
+  margin-right: 8px;
+  position: relative;
+}
+
+.x-step-progress .x-step-icon {
+  border-color: #1DA1F2;
+}
+
+.x-step-progress .x-step-icon:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #1DA1F2;
+  animation: x-pulse 1s infinite;
+}
+
+.x-step-complete .x-step-icon {
+  border-color: #00ba7c;
+  background-color: #00ba7c;
+}
+
+.x-step-complete .x-step-icon:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 2px;
+  width: 8px;
+  height: 4px;
+  border: 2px solid white;
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg);
+  animation: none;
+}
+
+.x-step-error .x-step-icon {
+  border-color: #f4212e;
+  background-color: #f4212e;
+}
+
+.x-step-error .x-step-icon:after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  color: white;
+  font-size: 10px;
+  text-align: center;
+  line-height: 8px;
+}
+
+@keyframes x-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 移动设备适配 */
+@media (max-width: 500px) {
+  .x-media-list {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .x-dialog-content {
+    padding: 16px;
+  }
+}
+
+/* 多媒体项目标记样式 */
+.media-count-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(244, 33, 46);
+  color: white;
+  font-size: 10px;
+  min-width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 1px solid white;
+}
+
+/* 第三方服务样式 */
+.x-service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.x-service-item {
+  background-color: #192734;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.x-service-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.x-service-link {
+  display: block;
+  padding: 15px;
+  color: #1d9bf0;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+.x-service-link:hover {
+  background-color: rgba(29, 155, 240, 0.1);
+}
+
+/* 直接下载链接样式 */
+.x-download-link-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.x-download-link {
+  display: inline-block;
+  background-color: #1d9bf0;
+  color: white;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.x-download-link:hover {
+  background-color: #1a8cd8;
+}
+
+/* 暗色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .x-download-button {
+    background-color: rgba(239, 243, 244, 0.1);
+    color: rgb(239, 243, 244);
+  }
+  
+  .x-download-button:hover {
+    background-color: rgba(239, 243, 244, 0.2);
+  }
+  
+  .media-count-badge {
+    border-color: rgb(21, 32, 43);
+  }
+  
+  .x-dialog-content {
+    background-color: #15202b;
+    color: #fff;
+  }
+  
+  .x-dialog-content h3 {
+    color: #fff;
+  }
+  
+  .x-dialog-close {
+    color: #8899a6;
+    border-color: #38444d !important;
+  }
+  
+  .x-dialog-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .x-media-item {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* 下载按钮 - 保持与Twitter界面风格一致 */
+.x-download-btn {
+  background-color: var(--twitter-blue, #1DA1F2);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  margin: 0 0 0 8px;
+  min-width: 36px;
+  height: 36px;
+}
+
+.x-download-btn:hover {
+  background-color: var(--twitter-blue-dark, #1a91da);
+}
+
+.x-download-btn svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+/* 视频加载指示器特定样式 */
+.x-video-loading-indicator .x-indicator-content {
+  min-width: 300px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* 大号加载动画 */
+.x-video-loading-indicator .x-loading {
+  width: 36px;
+  height: 36px;
+  border-width: 4px;
+  margin-bottom: 12px;
+}
+
+/* 视频加载步骤样式 */
+.x-steps-container {
+  width: 100%;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.x-step-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* 进行中状态 */
+.x-step-progress {
+  background-color: rgba(29, 155, 240, 0.15);
+}
+
+.x-step-progress .x-step-text {
+  color: white;
+  font-weight: 500;
+}
+
+/* 完成状态 */
+.x-step-complete {
+  background-color: rgba(0, 186, 124, 0.15);
+}
+
+.x-step-complete .x-step-text {
+  color: white;
+}
+
+/* 错误状态 */
+.x-step-error {
+  background-color: rgba(244, 33, 46, 0.15);
+}
+
+.x-step-error .x-step-text {
+  color: white;
+}
+
+/* 进行中状态的动画 */
+@keyframes pulse-blue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(29, 155, 240, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(29, 155, 240, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(29, 155, 240, 0);
+  }
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+/* 视频加载指示器容器调整 */
+.x-video-loading-indicator .x-indicator-content {
+  min-width: 350px;
+  max-width: 450px;
+} 

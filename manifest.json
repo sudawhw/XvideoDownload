@@ -44,5 +44,6 @@
   "web_accessible_resources": [{
     "resources": ["images/*"],
     "matches": ["https://twitter.com/*", "https://x.com/*"]
-  }]
+  }],
+  "privacy_policy": "https://github.com/sudawhw/XvideoDownload/privacy-policy.md"
 } 
